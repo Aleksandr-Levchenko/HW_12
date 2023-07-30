@@ -362,7 +362,7 @@ def func_change_birthday(prm):
         if name in book.keys():
             date = prm[1]
             return book[name].change_birthday(Birthday(date))
-        else: return f"The {name} isn't in a database"
+        else: return f"The [bold red]{name}[/bold red] isn't in a database"
     else: return f"Expected 2 arguments, but {count_prm} was given.\nHer's an example >> change birthday Mike 12.05.1990"
 
 
@@ -375,13 +375,14 @@ def func_get_day_birthday(prm):
     # порахуємо кількість параметрів
     count_prm = get_count_prm(prm)
     prm = prm.split(" ")
-    if prm[0] == "": return f'Missed "Name" of the person'
+    if prm[0] == "": return f'Missed [bold red]Name[/bold red] of the person'
         
     if prm and (count_prm >= 1):
         name = prm[0].lower().capitalize()
         if name in book.keys():
+            if book[name].birthday.value == "None": return f"No [bold red]Birthday[/bold red] for {name}"
             return book[name].days_to_birthday() 
-        else: return f"The {name} isn't in a database"
+        else: return f"The [bold red]{name}[/bold red] isn't in a database"
     else: return f"Expected 1 arguments, but {count_prm} was given.\nHer's an example >> birthday Mike"
 
 
