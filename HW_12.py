@@ -9,7 +9,7 @@ from pathlib import Path
 import os
 import sys
 import platform  # для clearscrean()
-from RecordBook import AddressBook, Record, Name, Phone, Field, Birthday, PhoneException
+from RecordBook import AddressBook, Record, Name, Phone, Field, Birthday, PhoneException, BirthdayException
 import re
 import datetime
 
@@ -37,7 +37,7 @@ def main():
     cmd = ""
     clear_screen("")
     print("[bold white]CLI version 12.0[/bold white]")  
-    print("[white]Run >> [/white] [bold red]help[/bold red] - list of the commands")
+    print("[white]Run >> [/white][bold red]help[/bold red] - list of the commands")
     
     # головний цикл обробки команд користувача
     while True:
@@ -70,6 +70,8 @@ def input_error(func):
             else: return result
         
         # Обробка виключних ситуацій
+        except BirthdayException as err:
+            print(err)
         except PhoneException as err:
             print(err)
         except FileNotFoundError:    # Файл бази даних Відсутній

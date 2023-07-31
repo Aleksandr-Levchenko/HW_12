@@ -58,7 +58,10 @@ class Birthday(Field):
         pattern = r"^\d{2}(\.|\-|\/)\d{2}\1\d{4}$"  # дозволені дати формату DD.MM.YYYY 
         if re.match(pattern, new_birthday):         # альтернатива для крапки: "-" "/"
             self.__value = re.sub("[-/]", ".", new_birthday)  # комбінувати символи ЗАБОРОНЕНО DD.MM-YYYY 
-        else: self.__value = "None"
+        else: 
+            self.__value = "None"
+            raise BirthdayException("Unauthorized birthday format")
+            
       
         
 #========================================================
@@ -120,7 +123,7 @@ class Record():
                 return f"до {birthday.strftime('%d.%m.%Y')} залишилося = {dif}"
             else:
                 dif = birthday - now_date
-                return f"до {self.birthday.value} залишилося = {dif}"
+                return f"до {birthday.strftime('%d.%m.%Y')} залишилося = {dif}"
         else: return f"We have no information about {self.name.value}'s birthday."
     
     # змінює день народження для особи
@@ -173,6 +176,15 @@ class PhoneException(Exception):
         self.__message = None
         self.message = message
         #super().__init__(self.message)
+    
+    def __str__(self):
+        return f"Attention: {self.message}"
+
+
+class BirthdayException(Exception):
+    def __init__(self, message):
+        self.__message = None
+        self.message = message
     
     def __str__(self):
         return f"Attention: {self.message}"
