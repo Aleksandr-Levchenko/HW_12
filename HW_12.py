@@ -17,7 +17,6 @@ from rich import print
 from rich import box
 from rich.table import Table
 from rich.console import Console
-#from rich.live import Live
 
 
 #-----------------------------------------
@@ -26,13 +25,16 @@ from rich.console import Console
 # Lisa|None|+44345345345, +89777111222, +99222333
 # Alex|02.05.1974|+380954448899, +450342233     
 #-------------------------------------------
+
 # Получаем абсолютный путь к запущенной программе
 absolute_path = os.path.abspath(sys.argv[0])
 path = Path(sys.path[0]).joinpath("data_12.bin")
+
 book = AddressBook()
 
 
-# Головна функція роботи CLI(Command Line Interface - консольного скрипту)  
+# Головна функція роботи CLI(Command Line Interface - консольного скрипту) 
+
 def main():
     cmd = ""
     clear_screen("")
@@ -64,10 +66,10 @@ def main():
 def input_error(func):
     def inner(handler, cmd, prm):
         try:
-            result = func(handler, cmd, prm)
+            result = func(handler, cmd, prm) # handler()
             if not result == "Good bye!": 
-                print(result) # ПЕЧАТЬ
-            else: return result
+                print(result)                  # ПЕЧАТЬ всіх Message від всіх функцій оброботчиков
+            else: return result   
         
         # Обробка виключних ситуацій
         except BirthdayException as err:
@@ -473,7 +475,7 @@ def parcer_commands(cmd_line):
         tmp = cmd_line.split()
         
         # перевіремо ПОДВІЙНУ команду
-        if len(tmp) > 1 and f"{tmp[0]} {tmp[1]}".lower() in COMMANDS:
+        if len(tmp) > 1 and f"{tmp[0]} {tmp[1]}".lower() in COMMANDS: #  add Mike 4589 94508
             cmd = f"{tmp[0]} {tmp[1]}".lower()
             prm = cmd_line.partition(cmd)[2].strip()
             

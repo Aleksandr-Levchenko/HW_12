@@ -22,6 +22,7 @@ class Name(Field):
     def value(self, new_value):
         self.__value = new_value
 
+  
 
 # клас Телефон
 class Phone(Field): 
@@ -60,7 +61,7 @@ class Birthday(Field):
             self.__value = re.sub("[-/]", ".", new_birthday)  # комбінувати символи ЗАБОРОНЕНО DD.MM-YYYY 
         else: 
             self.__value = "None"
-            raise BirthdayException("Unauthorized birthday format")
+            # raise BirthdayException("Unauthorized birthday format")
             
       
         
